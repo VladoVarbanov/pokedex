@@ -87,7 +87,7 @@ export default function PokeCard(props) {
         cache[selectedPokemon] = pokemonData;
         localStorage.setItem("pokedex", JSON.stringify(cache));
       } catch (err) {
-        console.error(err.message);
+        console.error(err);
       } finally {
         setLoading(false);
       }
