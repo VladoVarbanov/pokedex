@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { first151Pokemon, getFullPokedexNumber } from "../utils";
 
 export default function SideNav(props) {
-  const { selectedPokemon, setSelectedPokemon } = props;
+  const {
+    selectedPokemon,
+    setSelectedPokemon,
+    handleToggleMenu,
+    showSideMenu,
+  } = props;
   const [searchValue, setSearchValue] = useState("");
   const filteredPokemon = first151Pokemon.filter((ele, eleIndex) => {
     if (getFullPokedexNumber(eleIndex).includes(searchValue)) {
@@ -16,8 +21,11 @@ export default function SideNav(props) {
     return false;
   });
   return (
-    <nav>
-      <div className={"header"}>
+    <nav className={" " + (showSideMenu ? " open" : "")}>
+      <div className={"header " + (showSideMenu ? " open" : "")}>
+        <button onClick={handleToggleMenu} className="open-nav-button">
+          <i className="fa-solid fa-arrow-left-long"></i>
+        </button>
         <h1 className="text-gradient">Pokédex</h1>
       </div>
       <input
@@ -34,6 +42,7 @@ export default function SideNav(props) {
           <button
             onClick={() => {
               setSelectedPokemon(truePokedexNumber);
+              handleToggleMenu();
             }}
             key={pokemonIndex}
             className={
